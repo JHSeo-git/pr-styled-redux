@@ -43,13 +43,13 @@ function Foundation(props: FoundationProps) {
   return (
     <Block>
       <HeadingTitle scale="h1">
-        <Strong>Viable Design System</Strong>
-        <Para>for B2B System</Para>
+        <Strong>Design System</Strong>
+        <Para>for Styled System</Para>
         <Para>: : UI Resource</Para>
       </HeadingTitle>
       <SubTitle scale="h2">
-        <Para>Ver 1.1</Para>
-        <Para>Created by LG CNS UX</Para>
+        <Para>Ver 0.1</Para>
+        <Para>Created by UX</Para>
       </SubTitle>
     </Block>
   );
