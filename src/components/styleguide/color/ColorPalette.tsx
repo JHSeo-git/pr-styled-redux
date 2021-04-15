@@ -1,33 +1,61 @@
-import { ColorSpread, ContentSpread, StatusSpread } from 'styled-components';
-import { SinglexTheme } from '../../../lib/styles/SinglexTheme';
-import StyleGuideSection from '../../layouts/StyleGuideSection';
-import ColorPaletteSection from './ColorPaletteSection';
+import styled from 'styled-components';
+import media from '../../../lib/styles/media';
+import { responsiveWidth } from '../../../lib/styles/responsive';
+import Heading from '../../elements/common/Heading';
+import ColorGridItem from './ColorGridItem';
 
-function spreadToArray(spread: ColorSpread | ContentSpread | StatusSpread) {
-  return Object.entries<string | undefined>(spread).map(([key, value]) => ({
-    key,
-    value,
-  }));
-}
+const Palette = styled.div`
+  padding-top: 3rem; // 48px;
+  padding-bottom: 3rem; // 48px;
 
-function ColorPalette(props: ColorPaletteProps) {
-  const primary = spreadToArray(SinglexTheme.color.primary);
-  const secondary = spreadToArray(SinglexTheme.color.secondary);
-  const gray = spreadToArray(SinglexTheme.color.gray);
-  const status = spreadToArray(SinglexTheme.color.status);
-  const contentNormal = spreadToArray(SinglexTheme.color.normal);
-  const contentStrong = spreadToArray(SinglexTheme.color.strong);
+  border-top: 0.0625rem solid ${(props) => props.theme.color.gray[200]}; // 1px;
+  border-bottom: 0.0625rem solid ${(props) => props.theme.color.gray[200]}; // 1px;
+  & + & {
+    border-top: none;
+  }
+`;
+
+const PaletteSubject = styled(Heading)`
+  margin-bottom: 1.5rem;
+  ${responsiveWidth};
+`;
+
+const PaletteGrid = styled.div`
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 1rem;
+  ${media.small} {
+    grid-template-columns: repeat(1, 1fr);
+  }
+  ${responsiveWidth};
+`;
+
+function ColorPalette({ title, items }: ColorPaletteProps) {
   return (
-    <StyleGuideSection title="Color Palette">
-      <ColorPaletteSection title="Primary Color" items={primary} />
-      <ColorPaletteSection title="Secondary Color" items={secondary} />
-      <ColorPaletteSection title="Gray Color" items={gray} />
-      <ColorPaletteSection title="Status Color" items={status} />
-      <ColorPaletteSection title="Content Normal Color" items={contentNormal} />
-      <ColorPaletteSection title="Content Strong Color" items={contentStrong} />
-    </StyleGuideSection>
+    <Palette>
+      <PaletteSubject scale="h2">{title}</PaletteSubject>
+      <PaletteGrid>
+        {items.map(({ key, value }, i) => (
+          <ColorGridItem
+            key={i}
+            colorKey={key}
+            colorValue={value}
+            contrast={i >= items.length - 5}
+          />
+        ))}
+      </PaletteGrid>
+    </Palette>
   );
 }
-export type ColorPaletteProps = {};
+
+type KV = {
+  key: string;
+  value?: string;
+};
+
+export type ColorPaletteProps = {
+  title: string;
+  items: KV[];
+};
 
 export default ColorPalette;

@@ -8,6 +8,7 @@ import GlobalStyle from './lib/styles/GlobalStyle';
 import { SinglexTheme } from './lib/styles/SinglexTheme';
 import Foundation from './pages/styleguide/Foundation';
 import StyleGuideFooter from './components/layouts/StyleGuideFooter';
+import TypographyGuide from './pages/styleguide/TypographyGuide';
 
 function App() {
   return (
@@ -30,6 +31,9 @@ function App() {
                   </Route>
                   <Route path="/styleguide/button">
                     <ButtonGuide />
+                  </Route>
+                  <Route path="/styleguide/typography">
+                    <TypographyGuide />
                   </Route>
                 </StyleGuideMain>
                 <StyleGuideFooter>

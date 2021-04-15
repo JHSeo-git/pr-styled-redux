@@ -1,9 +1,8 @@
-import ColorPalette from '../../components/styleguide/color/ColorPalette';
+import ColorSection from '../../components/styleguide/color/ColorSection';
 
 function ColorGuide(props: ColorGuideProps) {
-  return <ColorPalette />;
+  return <ColorSection />;
 }
-
 export type ColorGuideProps = {};
 
 export default ColorGuide;
